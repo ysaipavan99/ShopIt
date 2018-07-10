@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SignUp</title>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <link rel="stylesheet" href="css/signup.css">
+  <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+  <div class="limiter">
+    <div class="container">
+      <div class="signupbox">
+        <form class="signup-form validate-form">
+          <div class="signup-form-title">
+            Enter the details
+          </div>
+
+          <div class="wrap-inp validate-inp" data-validate = "Enter Valid Name">
+            <input class="inp" type="text" name="uname">
+            <span class="focus-inp" data-placeholder="Name"></span>
+          </div>
+
+          <div class="gendertitle">
+            Gender
+          </div>
+          <div class="genderclass">
+            <span class="gender" >
+              <input type="radio" name="gender" value="m" required> Male
+              <input type="radio" name="gender" value="f" > Female
+              <input type="radio" name="gender" value="n" > Other
+            </span>
+          </div>
+
+          <div class="wrap-inp validate-inp" data-validate = "Enter valid Number">
+						<input class="inp" type="text" name="mobnum">
+            <span class="focus-inp" data-placeholder="MobileNumber"></span>
+					</div>
+
+          <div class="wrap-inp validate-inp" data-validate = "Valid email is: a@b.c">
+						<input class="inp" type="text" name="email">
+            <span class="focus-inp" data-placeholder="Email"></span>
+					</div>
+          <div class="wrap-inp validate-inp" data-validate="Enter password">
+            <span class="btn-show-pass">
+              <i class="zmdi zmdi-eye"></i>
+            </span>
+            <input class="inp" type="password" name="pass">
+            <span class="focus-inp" data-placeholder="SetPassword"></span>
+          </div>
+          <div class="wrap-inp validate-inp" data-validate="Enter Password">
+            <span class="btn-show-pass">
+              <i class="zmdi zmdi-eye"></i>
+            </span>
+            <input class="inp" type="password" name="pass">
+            <span class="focus-inp" data-placeholder="ReEnterPassword"></span>
+          </div>
+
+          <div class="container-signup-form-btn">
+						<div class="wrap-signup-form-btn">
+							<div class="signup-form-bgbtn"></div>
+							<button class="signup-form-btn">
+								Sign Up
+							</button>
+						</div>
+					</div>
+
+
+          <div class="have-ac">
+            <span class="txt1">
+              Already have an account?
+            </span>
+
+            <a class="log-in" href="file:///C:/Users/HP/Desktop/NCP/ShopIt/login.html">
+              LogIn
+            </a>
+          </div>
+     </form>
+    </div>
+   </div>
+  </div>
+
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/signup.js"></script>
+
+ </body>
+</html>
