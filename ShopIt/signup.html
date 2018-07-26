@@ -41,14 +41,14 @@
 						<input class="inp" type="text" name="email">
             <span class="focus-inp" data-placeholder="Email"></span>
 					</div>
-          <div class="wrap-inp validate-inp" data-validate="Enter password">
+          <div class="wrap-inp validate-inp" data-validate="Enter a Strong Password">
             <span class="btn-show-pass">
               <i class="zmdi zmdi-eye"></i>
             </span>
             <input class="inp" type="password" name="pass">
             <span class="focus-inp" data-placeholder="SetPassword"></span>
           </div>
-          <div class="wrap-inp validate-inp" data-validate="Enter Password">
+          <div class="wrap-inp validate-inp" data-validate="Enter a Strong Password">
             <span class="btn-show-pass">
               <i class="zmdi zmdi-eye"></i>
             </span>
@@ -56,10 +56,15 @@
             <span class="focus-inp" data-placeholder="ReEnterPassword"></span>
           </div>
 
+          <div>
+						<input type="checkbox"  name="checkbox" required>
+						I Accept Terms and Conditions.
+					</div>
+
           <div class="container-signup-form-btn">
 						<div class="wrap-signup-form-btn">
 							<div class="signup-form-bgbtn"></div>
-							<button class="signup-form-btn">
+							<button class="signup-form-btn" onclick="signup()">
 								Sign Up
 							</button>
 						</div>

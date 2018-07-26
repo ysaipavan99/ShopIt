@@ -19,6 +19,10 @@ a:hover {
   color: linear-gradient(left, #21d4fd, #b721ff);
 }
 
+body{
+	background-image:url("log1.jpg");
+}
+
 button {
 	outline: none !important;
 	border: none;
@@ -44,7 +48,7 @@ button:hover {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background-image: url("login.png");
+  
 }
 
 

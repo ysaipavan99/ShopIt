@@ -31,6 +31,9 @@
             }
         }
 
+        var p1=$('#pass1').text();
+        alert(p1);
+
         if(check){
           alert("Bravo!! you know how to fill a form!!")
         }
@@ -51,6 +54,22 @@
                 return false;
             }
         }
+        else if ($(input).attr('name')=='uname') {
+              if($(input).val().trim().match(/^[a-zA-Z ]{2,30}$/)==null){
+                return false;
+              }
+        }
+        else if ($(input).attr('name')=='mobnum') {
+              if($(input).val().trim().match(/^[0]?[789]\d{9}$/)==null){
+                return false;
+              }
+        }
+        else if ($(input).attr('type')=='password') {
+              if($(input).val().trim().match(/^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{7,}$/)==null){
+                return false;
+              }
+        }
+
         else {
             if($(input).val().trim() == ''){
                 return false;
