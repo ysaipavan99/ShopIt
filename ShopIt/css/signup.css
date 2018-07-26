@@ -19,6 +19,9 @@ a:hover {
   color: linear-gradient(left, #21d4fd, #b721ff);
 }
 
+body{
+	background-image: url("log2.jpg");
+}
 
 button {
 	outline: none !important;
