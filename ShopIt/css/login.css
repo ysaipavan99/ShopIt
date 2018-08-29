@@ -24,7 +24,7 @@ body{
 }
 
 button {
-	outline: none !important;
+	outline: none;
 	border: none;
 	background: transparent;
 }
@@ -48,7 +48,7 @@ button:hover {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  
+
 }
 
 

@@ -3,9 +3,8 @@
 <head>
 	<title>Login</title>
 	<meta charset="UTF-8">
-
 </head>
-<body style="overflow:hidden; background-color:#1B4F72" >
+<body style="overflow:hidden; background-color:#1B4F72" onload="loadXMLDoc()">
   <link rel="stylesheet" href="css/top_frame.css">
   <table width="100%">
     <tr >
@@ -22,22 +21,50 @@
         <table width="100%" height="80px">
           <tr>
             <td>
-              <p><i>Name:</i><b>Sai Pavan</b></p>
+              <p><i>Name:</i><b id="Name">Sai Pavan</b></p>
             </td>
             <td>
-              <p><i>Gender:</i> <b>Male</b></p>
+              <p><i>Gender:</i> <b id="Gender">Male</b></p>
             </td>
           </tr>
           <tr>
             <td>
-              <p><i>Mobile:</i> <b>9491699997</b></p>
+              <p><i>Mobile:</i> <b id="Phone">9491699997</b></p>
             </td>
             <td>
-              <p><i>Email:</i> <b>ysaipavan99@gmail.com</b></p>
+              <p><i>Email:</i> <b id="Email">ysaipavan99@gmail.com</b></p>
             </td>
           </tr>
         </table>
       </td>
     </tr>
   </table>
+	<script>
+		function loadXMLDoc(){
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("GET","../XMLSet/profile.xml",true);
+
+			xmlhttp.onreadystatechange=function(){
+				if(xmlhttp.readyState==4 && xmlhttp.status==200){
+					myFunction(this);
+				}
+			};
+			xmlhttp.send();
+		}
+
+		function myFunction(xml){
+			var xmlDoc = xml.responseXML;
+			var x = xmlDoc.getElementsByTagName("Profile");
+			var mail = x[0].getElementsByTagName("Email")[0].childNodes[0].nodeValue;
+			var password = x[0].getElementsByTagName("Password")[0].childNodes[0].nodeValue;
+			var name = x[0].getElementsByTagName("Name")[0].childNodes[0].nodeValue;
+			var gender = x[0].getElementsByTagName("Gender")[0].childNodes[0].nodeValue;
+			var phone = x[0].getElementsByTagName("Phone")[0].childNodes[0].nodeValue;
+			document.getElementById("Name").innerHTML = name;
+			document.getElementById("Email").innerHTML = mail;
+			document.getElementById("Phone").innerHTML = phone;
+			document.getElementById("Gender").innerHTML = gender;
+		}
+	</script>
 </body>
+</html>

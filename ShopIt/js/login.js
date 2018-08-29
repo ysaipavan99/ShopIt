@@ -50,6 +50,9 @@
                 return false;
             }
         }
+        if($(input).attr('type') == 'password'){
+
+        }
         else {
             if($(input).val().trim() == ''){
                 return false;

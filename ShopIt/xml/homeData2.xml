@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="../html/xmlTrial_html.xslt"?>
+<productList>
+  <product>
+    <title>The Secret Seven</title>
+    <cost>Rs 500</cost>
+  </product>
+  <product>
+    <title>Kane and Abel</title>
+    <cost>Rs 1000</cost>
+  </product>
+</productList>

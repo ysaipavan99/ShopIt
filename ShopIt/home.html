@@ -2,17 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Home</title>
+    <title>HOME</title>
+    <link rel="stylesheet" href="./css/home.css">
   </head>
-  <link rel="stylesheet" href="css/home.css">
-    <div class="mainContainer">
-      <frameset rows = "10%,90%">
-        <frame name = "top" src = "./html/top_frame.html"/>
-        <frame name = "bottom" src = "./html/bot_frame.html"/>
-        <noframes>
-          <body>Your browser does not support frames</body>
-        </noframes>
-      </frameset>
+  <body>
+    <div class="menu-area">
+      <ul>
+        <li><a href="profile.html">Profile</a></li>
+        <li><a href="">Settings</a></li>
+      </ul>
+      <form id="searched" onsubmit="return retrieveSearch();">
+          <input type="submit"/>
+          <input type="text" id='searchText' name="searched"/>
+      </form>
     </div>
-
+    <script src="./js/home.js"></script>
+  </body>
 </html>
