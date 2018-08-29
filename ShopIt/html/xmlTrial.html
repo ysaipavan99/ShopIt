@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script>
+var request = new XMLHttpRequest();
+request.open("GET", "../xml/homeData.xml", false);
+request.send();
+var xml = request.responseXML;
+var products = xml.getElementsByTagName("product");
+for(var i = 0; i < products.length; i++) {
+    var product = products[i];
+    var title = product.getElementsByTagName("title");
+        alert(title);
+}
+</script>
+
+</body>
+</html>

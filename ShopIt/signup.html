@@ -8,16 +8,64 @@
 <body>
   <link rel="stylesheet" href="css/signup.css">
   <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+
+
+  <script type="text/javascript" language="javascript">
+
+    var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+    var fso = new ActiveXObject("Scripting.FileSystemObject");
+    var FILENAME='C:\\Users\\user\\Documents\\ShopIt\\ShopIt\\XMLSet\\signup.xml';
+
+      function createfile()
+      {
+
+      var file;
+
+          var mail=document.getElementById('email').value;
+          var password=document.getElementById('passMain').value;
+          var uname=document.getElementById('uname').value;
+          var gender;
+          if(document.getElementById('genderm').checked){
+            gender="Male";
+          }
+          else if(document.getElementById('genderf').checked){
+            gender="Female";
+          }
+          else {
+            gender="Other";
+          }
+          var phone=document.getElementById('mobnum').value;
+
+            file= fso.CreateTextFile(FILENAME, true);
+            file.WriteLine('<?xml version="1.0" encoding="utf-8" ?>');
+            file.WriteLine('<Login>');
+            file.WriteLine('<Details category="1">');
+            file.WriteLine('<Email>'+mail+'</Email>');
+            file.WriteLine('<Password>'+password+'</Password>');
+            file.WriteLine('<Name>'+uname+'</Name>');
+            file.WriteLine('<Gender>'+gender+'</Gender>');
+            file.WriteLine('<MobNum>'+phone+'</MobNum>');
+            file.WriteLine('</Details>');
+            file.WriteLine('</Login>');
+
+        alert('file updated');
+
+      }
+
+
+  </script>
+
+
   <div class="limiter">
     <div class="container">
       <div class="signupbox">
-        <form class="signup-form validate-form">
+        <form class="signup-form validate-form" name="signupForm" id="signupForm">
           <div class="signup-form-title">
             Enter the details
           </div>
 
           <div class="wrap-inp validate-inp" data-validate = "Enter Valid Name">
-            <input class="inp" type="text" name="uname">
+            <input class="inp" type="text" name="uname" id="uname">
             <span class="focus-inp" data-placeholder="Name"></span>
           </div>
 
@@ -25,34 +73,34 @@
             Gender
           </div>
           <div class="genderclass">
-            <span class="gender" >
-              <input type="radio" name="gender" value="m" required> Male
-              <input type="radio" name="gender" value="f" > Female
-              <input type="radio" name="gender" value="n" > Other
+            <span class="gender" id="gender">
+              <input type="radio" name="gender" id="genderm" value="m" required> Male
+              <input type="radio" name="gender" id="genderf" value="f" > Female
+              <input type="radio" name="gender" id="gendern" value="n" > Other
             </span>
           </div>
 
           <div class="wrap-inp validate-inp" data-validate = "Enter valid Number">
-						<input class="inp" type="text" name="mobnum">
+						<input class="inp" type="text" name="mobnum" id="mobnum">
             <span class="focus-inp" data-placeholder="MobileNumber"></span>
 					</div>
 
           <div class="wrap-inp validate-inp" data-validate = "Valid email is: a@b.c">
-						<input class="inp" type="text" name="email">
+						<input class="inp" type="text" name="email" id="email">
             <span class="focus-inp" data-placeholder="Email"></span>
 					</div>
           <div class="wrap-inp validate-inp" data-validate="Enter a Strong Password">
             <span class="btn-show-pass">
               <i class="zmdi zmdi-eye"></i>
             </span>
-            <input class="inp" type="password" name="pass">
+            <input class="inp" type="password" name="passMain" id="passMain">
             <span class="focus-inp" data-placeholder="SetPassword"></span>
           </div>
           <div class="wrap-inp validate-inp" data-validate="Enter a Strong Password">
             <span class="btn-show-pass">
               <i class="zmdi zmdi-eye"></i>
             </span>
-            <input class="inp" type="password" name="pass">
+            <input class="inp" type="password" name="passConfirm" id="passConfirm">
             <span class="focus-inp" data-placeholder="ReEnterPassword"></span>
           </div>
 
@@ -64,7 +112,7 @@
           <div class="container-signup-form-btn">
 						<div class="wrap-signup-form-btn">
 							<div class="signup-form-bgbtn"></div>
-							<button class="signup-form-btn" onclick="signup()">
+							<button class="signup-form-btn" onclick="createfile()">
 								Sign Up
 							</button>
 						</div>
@@ -76,7 +124,7 @@
               Already have an account?
             </span>
 
-            <a class="log-in" href="file:///C:/Users/HP/Desktop/NCP/ShopIt/login.html">
+            <a class="log-in" href="login.html">
               LogIn
             </a>
           </div>

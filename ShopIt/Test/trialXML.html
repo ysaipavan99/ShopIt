@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Display Emp Details</title>
+
+    <script type="text/javascript" language="javascript">
+
+      var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+      var fso = new ActiveXObject("Scripting.FileSystemObject");
+      var FILENAME='C:\\Users\\user\\Documents\\ShopIt\\ShopIt\\Test\\example.xml';
+
+function createfile()
+{
+
+  var file;
+
+      var e1=document.getElementById('empName').value;
+      var p1=document.getElementById('empNumber').value;
+      var em1=document.getElementById('empEmail').value;
+      var d1=document.getElementById('empDate').value;
+
+      var tablemain = document.getElementById('tblmain');
+
+  if(fso.fileExists(FILENAME))
+      {
+    xmlDoc.load(FILENAME);
+        var lng;
+        lng=xmlDoc.getElementsByTagName("Details");
+
+        var xmlread= fso.OpenTextFile(FILENAME,1,true,0);
+
+        var x=xmlread.readAll();
+        var replace=x.replace('</Emp>','');
+        var sno=lng.length + 1;
+        file=fso.OpenTextFile(FILENAME,2,true);
+
+        file.writeLine(replace);
+
+        file.WriteLine('<Details category="'+sno+'">');
+        file.WriteLine('<SNo>'+sno+'</SNo>');
+        file.WriteLine('<Name>'+e1+'</Name>');
+        file.WriteLine('<PhoneNumber>'+p1+'</PhoneNumber>');
+        file.WriteLine('<Emailid>'+em1+'</Emailid>');
+        file.WriteLine('<Date>'+d1+'</Date>');
+
+        file.WriteLine('</Details>');
+        file.WriteLine('</Emp>');
+
+    alert('another file updated');
+      }
+      else
+      {
+
+        file= fso.CreateTextFile(FILENAME, true);
+        file.WriteLine('<?xml version="1.0" encoding="utf-8" ?>');
+    file.WriteLine('<?xml-stylesheet type="text/xsl" href="cdcatalog.xsl"?>');
+        file.WriteLine('<Emp>');
+        file.WriteLine('<Details category="1">');
+        file.WriteLine('<SNo>'+1+'</SNo>');
+        file.WriteLine('<Name>'+e1+'</Name>');
+        file.WriteLine('<PhoneNumber>'+p1+'</PhoneNumber>');
+        file.WriteLine('<Emailid>'+em1+'</Emailid>');
+        file.WriteLine('<Date>'+d1+'</Date>');
+
+        file.WriteLine('</Details>');
+        file.WriteLine('</Emp>');
+
+    alert('file updated');
+      }
+
+
+}
+
+
+    </script>
+</head>
+
+<body>
+
+  <form id="empForm" action="" method="get">
+
+      <p><b>Emp Registration:</b></p>
+
+      <table>
+        <tr>
+          <td>Name:</td>
+          <td><input type="text" id="empName" maxlength="25"/></td>
+        </tr>
+        <tr>
+          <td>Phone Number:</td>
+          <td><input type="text" id="empNumber" maxlength="10"/></td>
+        </tr>
+        <tr>
+          <td>EmailId:</td>
+          <td><input type="text" id="empEmail"/></td>
+        </tr>
+        <tr>
+          <td>Date:</td>
+          <td><input type="text" id="empDate" maxlength="10"/></td>
+        </tr>
+        <tr>
+          <td align="center">
+      <input type="button" value="Submit" onclick="createfile()"/></td>
+        </tr>
+      </table>
+
+</body>
+</html>

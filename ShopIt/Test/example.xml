@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<?xml-stylesheet type="text/xsl" href="cdcatalog.xsl"?>
+<Emp>
+<Details category="1">
+<SNo>1</SNo>
+<Name>Pramo</Name>
+<PhoneNumber>9445280954</PhoneNumber>
+<Emailid>13pramo@gmail.com</Emailid>
+<Date>25-08-18</Date>
+</Details>
+</Emp>

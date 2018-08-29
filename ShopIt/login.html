@@ -3,7 +3,35 @@
 <head>
 	<title>Login</title>
 	<meta charset="UTF-8">
+	<script type="text/javascript" language="javascript">
 
+		var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+		var fso = new ActiveXObject("Scripting.FileSystemObject");
+		var FILENAME='C:\\Users\\user\\Documents\\ShopIt\\ShopIt\\XMLSet\\login.xml';
+
+			function createfile()
+			{
+
+			var file;
+
+					var mail=document.getElementById('email').value;
+					var password=document.getElementById('pass').value;
+
+						file= fso.CreateTextFile(FILENAME, true);
+						file.WriteLine('<?xml version="1.0" encoding="utf-8" ?>');
+						file.WriteLine('<Login>');
+						file.WriteLine('<Details category="1">');
+						file.WriteLine('<Email>'+mail+'</Email>');
+						file.WriteLine('<Password>'+password+'</Password>');
+						file.WriteLine('</Details>');
+						file.WriteLine('</Login>');
+
+				alert('file updated');
+
+			}
+
+
+	</script>
 </head>
 <body>
   <link rel="stylesheet" href="css/login.css">
@@ -11,12 +39,12 @@
 	<div class="limiter">
 		<div class="container">
 			<div class="loginbox">
-				<form class="login-form validate-form">
+				<form class="login-form validate-form" name="loginForm" onsubmit="return createfile();" action="home.html">
 					<div class="login-form-title">
 						Welcome
 					</div>
 					<div class="wrap-inp validate-inp" data-validate = "Valid email is: a@b.c">
-						<input class="inp" type="text" name="email" onblur="unsel()">
+						<input class="inp" type="text" name="email" id="email">
             <span class="focus-inp" data-placeholder="Email"></span>
 					</div>
 
@@ -24,7 +52,7 @@
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-						<input class="inp" type="password" name="pass" onblur="unsel()">
+						<input class="inp" type="password" name="pass" id="pass">
 						<span class="focus-inp" data-placeholder="Password"></span>
 					</div>
 
@@ -36,9 +64,7 @@
 					<div class="container-login-form-btn">
 						<div class="wrap-login-form-btn">
 							<div class="login-form-bgbtn"></div>
-							<button class="login-form-btn" onclick="Login()">
-								Login
-							</button>
+							<input type="submit" class="login-form-btn" onclick="Login()"/>
 						</div>
 					</div>
 
@@ -47,7 +73,7 @@
 							Don’t have an account?
 						</span>
 
-						<a class="sign-up" href="file:///C:/Users/HP/Desktop/NCP/ShopIt/signup.html">
+						<a class="sign-up" href="signup.html">
 							Sign Up
 						</a>
 					</div>

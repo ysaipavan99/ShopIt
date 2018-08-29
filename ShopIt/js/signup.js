@@ -31,11 +31,11 @@
             }
         }
 
-        var p1=$('#pass1').text();
-        alert(p1);
+        var p1=$('#passMain').text();
 
         if(check){
-          alert("Bravo!! you know how to fill a form!!")
+          alert("Bravo!! you know how to fill a form!!");
+          getValues();
         }
 
         return check;
@@ -110,3 +110,42 @@
 
 
 })(jQuery);
+
+function sendData(form) {
+
+  var XHR = new XMLHttpRequest();
+
+  // Bind the FormData object and the form element
+  var FD = new FormData(form);
+  alert("Coming here");
+
+  // Define what happens on successful data submission
+  XHR.addEventListener("load", function(event) {
+    alert(event.target.responseText);
+  });
+
+  // Define what happens in case of error
+  XHR.addEventListener("error", function(event) {
+    alert('Oops! Something went wrong.');
+  });
+
+  // Set up our request
+  XHR.open("POST", "http://192.168.1.5:8000/insertUser");
+
+  // The data sent is what the user provided in the form
+  XHR.send(FD);
+}
+
+function getValues(){
+  var uname=document.signupForm.uname.value;
+  var gender=document.signupForm.gender.value;
+  var mobnum=document.signupForm.mobnum.value;
+  var email=document.signupForm.mobnum.value;
+  var passMain=document.signupForm.value;
+
+  var form = document.getElementById("signupForm");
+
+  sendData(form);
+
+
+}
