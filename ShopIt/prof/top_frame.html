@@ -45,8 +45,10 @@
 			xmlhttp.open("GET","../XMLSet/profile.xml",true);
 
 			xmlhttp.onreadystatechange=function(){
-				if(xmlhttp.readyState==4 && xmlhttp.status==200){
+				//alert(xmlhttp.status);
+				if(xmlhttp.readyState==4 && xmlhttp.status==0){
 					myFunction(this);
+
 				}
 			};
 			xmlhttp.send();

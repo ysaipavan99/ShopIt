@@ -1,4 +1,6 @@
 
+
+
 (function ($) {
     "use strict";
 
@@ -36,7 +38,11 @@
         if(check){
           alert("Bravo!! you know how to fill a form!!");
           getValues();
-        }
+
+
+
+
+      }
 
         return check;
     });
@@ -111,41 +117,95 @@
 
 })(jQuery);
 
+
+
 function sendData(form) {
 
-  var XHR = new XMLHttpRequest();
-
-  // Bind the FormData object and the form element
-  var FD = new FormData(form);
-  alert("Coming here");
-
-  // Define what happens on successful data submission
-  XHR.addEventListener("load", function(event) {
-    alert(event.target.responseText);
+  // var XHR = new XMLHttpRequest();
+  // alert(JSON.stringify(form));
+  // // Bind the FormData object and the form element
+  // //var FD = new FormData(form);
+  // alert("Coming here 1");
+  //
+  // // Define what happens on successful data submission
+  // XHR.addEventListener("load", function(event) {
+  //   alert(event.target.responseText);
+  // });
+  //
+  // // Define what happens in case of error
+  // XHR.addEventListener("error", function(event) {
+  //   alert('Oops! Something went wrong.');
+  // });
+  //
+  // // Set up our request
+  // XHR.open("POST", "http://192.168.43.136:8000/insertUser");
+  // alert("Coming here 2");
+  // // The data sent is what the user provided in the form
+  // XHR.send(form);
+  // alert("Coming here 3");
+/*
+//Fetch library
+  fetch('http://192.168.43.136:8000/insertUser',{
+    method:POST,
+    body:form
   });
 
-  // Define what happens in case of error
-  XHR.addEventListener("error", function(event) {
-    alert('Oops! Something went wrong.');
-  });
+*/
+alert('Coming into the function');
+//JQuery - ajax
 
-  // Set up our request
-  XHR.open("POST", "http://192.168.1.5:8000/insertUser");
-
-  // The data sent is what the user provided in the form
-  XHR.send(FD);
 }
 
 function getValues(){
   var uname=document.signupForm.uname.value;
   var gender=document.signupForm.gender.value;
   var mobnum=document.signupForm.mobnum.value;
-  var email=document.signupForm.mobnum.value;
-  var passMain=document.signupForm.value;
+  var email=document.signupForm.email.value;
+  var passMain=document.signupForm.passMain.value;
 
-  var form = document.getElementById("signupForm");
+  var data={"Name":uname, "Gender":gender, "MobNum":mobnum, "Email":email, "Password":passMain};
 
-  sendData(form);
+  //var form = document.getElementById("signupForm");
+
+  //sendData(data);
+
+  var password=passMain;
+  alert(password);
+
+
+  firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
+    //var user = firebase.auth().currentUser;
+    logUser(user); // Optional
+}, function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+});
+
+// function logUser(user) {
+//     alert("yo");
+//     alert(user);
+//     var ref = firebase.database().ref("users");
+//     var obj = data;
+//     ref.push(obj); // or however you wish to update the node
+// }
+alert("yo");
+firebase.database().ref('users/FZp8eQvVmNagMMqXseFPJBP4fcC3').set({
+    username: uname,
+    email: email,
+    password : passMain
+  }, function(error){
+    if(error){
+      alert("Write failed");
+    }
+    else{
+      alert("Write successful");
+    }
+  }
+);
+
+
+
 
 
 }

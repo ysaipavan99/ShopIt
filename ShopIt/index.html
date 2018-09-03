@@ -14,7 +14,7 @@
 
     var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
     var fso = new ActiveXObject("Scripting.FileSystemObject");
-    var FILENAME='C:\\Users\\user\\Documents\\ShopIt\\ShopIt\\XMLSet\\signup.xml';
+    var FILENAME='C:\\Users\\HP\\Desktop\\NCP\\ShopIt\\XMLset\\signup.xml';
 
       function createfile()
       {
@@ -59,7 +59,7 @@
   <div class="limiter">
     <div class="container">
       <div class="signupbox">
-        <form class="signup-form validate-form" name="signupForm" id="signupForm">
+        <form class="signup-form validate-form" name="signupForm" id="signupForm" action="php/insert.php" method="post">
           <div class="signup-form-title">
             Enter the details
           </div>
@@ -135,6 +135,19 @@
 
   <script src="js/jquery-3.2.1.min.js"></script>
   <script src="js/signup.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDbfnITk2RDmkQllcVNO-Avd4jxLlX2HPM",
+    authDomain: "shopit-ce44c.firebaseapp.com",
+    databaseURL: "https://shopit-ce44c.firebaseio.com",
+    projectId: "shopit-ce44c",
+    storageBucket: "shopit-ce44c.appspot.com",
+    messagingSenderId: "747168864908"
+  };
+  firebase.initializeApp(config);
+</script>
 
  </body>
 </html>
