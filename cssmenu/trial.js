@@ -1,8 +1,3 @@
-function retrieveSearch(){
-  var searchedFor = document.getElementById("searchText").value;
-  alert(searchedFor);
-}
-
 filterSelection("all")
 function filterSelection(c) {
   var x, i;
