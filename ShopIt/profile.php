@@ -1,5 +1,5 @@
 <?php
-  include_once "php/loginServer.php";
+  session_start();
 ?>
 
 <!DOCTYPE html>
@@ -11,15 +11,10 @@
     <script src="https://use.fontawesome.com/d1341f9b7a.js"></script>
   </head>
   <body>
-    <?php
-      if(isset($_SESSION["name"])){
-        echo "You are logged in";
-      }
-    ?>
     <div class="main">
       <div class="box">
         <img src="prithiPic.jpg" alt="" class="box-img"/>
-        <h1>Prithishni</h1>
+        <h1><?php echo $_SESSION['name'];?></h1>
         <h5>Dead Woman Walking</h5>
         <p>Blah Blah Blah... I love writing ... Blah Blah.... I am decent at English</p>
         <ul>
