@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,7 +11,7 @@
   <body>
     <div class="menu-area">
       <ul>
-        <li><a href="profile.html">Profile</a></li>
+        <li><a href="profile.php">Profile</a></li>
         <li><a href="">Settings</a></li>
       </ul>
       <form id="searched" onsubmit="return retrieveSearch();">
