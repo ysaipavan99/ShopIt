@@ -1,0 +1,64 @@
+<form action="php/review.php" method="POST" onSubmit="return validateForm();">
+<div style="width: 400px;">
+</div>
+<div style="padding-bottom: 18px;font-size : 24px;">Product Review</div>
+</div>
+<div style="padding-bottom: 18px;">Which product did you buy?<br/>
+<select id="data_3" name="product" id="product" style="width : 450px;" class="form-control">
+<option>Product1</option>
+<option>Product2</option>
+<option>Product3</option>
+<option>Product4</option>
+<option>Product5</option>
+</select>
+</div>
+<div style="padding-bottom: 18px;">Rate this product<span style="color: red;"> *</span><br/>
+<select id="data_4" name="rate" id="rate" style="width : 150px;" class="form-control">
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+</select>
+</div>
+<div style="padding-bottom: 18px;">Title<span style="color: red;"> *</span><br/>
+<input type="text" id="title" name="title" style="width : 450px;" class="form-control"/>
+</div>
+<div style="padding-bottom: 18px;">Pros<br/>
+<textarea id="pros" false name="pros" style="width : 450px;" rows="3" class="form-control"></textarea>
+</div>
+<div style="padding-bottom: 18px;">Cons<br/>
+<textarea id="cons" false name="cons" style="width : 450px;" rows="3" class="form-control"></textarea>
+</div>
+<div style="padding-bottom: 18px;">Review<span style="color: red;"> *</span><br/>
+<textarea id="review" false name="review" style="width : 450px;" rows="9" class="form-control"></textarea>
+</div>
+<div style="padding-bottom: 18px;">Would you recommend this product?<br/>
+<span><input type="radio" id="y" name="rec" value="Yes"/> Yes</span><br/>
+<span><input type="radio" id="n" name="rec" value="No"/> No</span><br/>
+<span><input type="radio" id="ns" name="rec" value="I am not sure"/> I am not sure</span><br/>
+</div>
+<div style="padding-bottom: 18px;"><input name="sub" value="Submit" type="submit"/></div>
+<div>
+</div>
+</form>
+
+<script type="text/javascript">
+function validateForm() {
+
+if (isEmpty(document.getElementById('title').value.trim())) {
+alert('Title is required!');
+return false;
+}
+if (isEmpty(document.getElementById('review').value.trim())) {
+alert('Review is required!');
+return false;
+}
+return true;
+}
+function isEmpty(str) { return (str.length === 0 || !str.trim()); }
+function validateEmail(email) {
+var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,15}(?:\.[a-z]{2})?)$/i;
+return isEmpty(email) || re.test(email);
+}
+</script>
