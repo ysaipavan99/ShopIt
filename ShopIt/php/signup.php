@@ -20,10 +20,10 @@ if(!$conn)
   mysqli_select_db($conn,$dbName) or die (mysql_error());
 $sql="insert into userdetails (Name,Email,Password,Gender,MobNum) values ('$name','$email','$pass','$gender','$mobnum')";
 if(!$conn->query($sql)){
-  die("error inserting");
+  die("Email ID aleready In use");
 }
 else{
-  echo('Profile Added');
+  header("Location: ../mainPage.html");
 }
 
 ?>

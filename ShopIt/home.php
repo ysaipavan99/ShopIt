@@ -12,7 +12,7 @@
     <div class="menu-area">
       <ul>
         <li><a href="profile.php">Profile</a></li>
-        <li><a href="">Settings</a></li>
+        <li><a href="settings.html">Settings</a></li>
       </ul>
       <form id="searched" onsubmit="return retrieveSearch();">
           <input type="submit"/>
