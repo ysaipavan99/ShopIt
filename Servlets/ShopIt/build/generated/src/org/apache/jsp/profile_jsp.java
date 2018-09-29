@@ -3,6 +3,10 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.DriverManager;
+import java.sql.Connection;
 
 public final class profile_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -44,6 +48,10 @@ public final class profile_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
@@ -55,7 +63,7 @@ public final class profile_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("  </head>\n");
       out.write("  <body>\n");
       out.write("    <div class=\"main\">\n");
-      out.write("      <div class=\"box\">\n");
+      out.write("        <div class=\"box\">\n");
       out.write("        <img src=\"prithiPic.jpg\" alt=\"\" class=\"box-img\"/>\n");
       out.write("        <h1>");
       out.print(request.getAttribute("name"));
@@ -77,9 +85,81 @@ public final class profile_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("          <li><a href=\"#\"><i class=\"fa fa-google-plus-square\" aria-hidden=\"true\"></i></a></li>\n");
       out.write("        </ul>\n");
       out.write("      </div>\n");
-      out.write("      <div class=\"postsList\">\n");
+      out.write("      \n");
+      out.write("        <div class=\"postsList\">\n");
+      out.write("          <div class=\"row\">\n");
+      out.write("            \n");
+      out.write("        ");
+
+            try{
+        Class.forName("com.mysql.jdbc.Driver");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        String url="jdbc:mysql://localhost/ShopIt";
+        String user="root";
+        String pw="";
+        
+        Connection con=null;
+        
+        try{
+            con=DriverManager.getConnection(url,user,pw);
+            Statement st=con.createStatement();
+            System.out.println("con est");
+                       
+            String email=request.getAttribute("email").toString().trim();
+            
+            String sql="select * from reviews,reviewer WHERE reviews.ReviewID=reviewer.ReviewID and reviewer.EmailID='"+email+"'";
+            
+            ResultSet rs=st.executeQuery(sql);
+            
+            if(!rs.next()){
+                System.out.println("Nothing to show");
+                out.println("<html><head></head><body onload=\"alert('Nothing to show')\"></body></html>");
+            }
+            else{
+                System.out.println(rs.getString(3));
+                System.out.println(rs.getString(4));
+                do{
+            
+      out.write("\n");
+      out.write("            <div class=\"column\">\n");
+      out.write("            <div class=\"content\" onclick='window.location = `http://localhost:8080/ShopIt/searched.jsp?param1=");
+      out.print(rs.getString(1));
+      out.write("` '>\n");
+      out.write("                <h2>");
+      out.print(rs.getString(4));
+      out.write("</h2>\n");
+      out.write("                Rating: <b>");
+      out.print(rs.getString(3));
+      out.write("</b><br/>\n");
+      out.write("                Review: <b>");
+      out.print(rs.getString(7));
+      out.write("</b><br/>\n");
+      out.write("            </div>\n");
+      out.write("            </div>\n");
+      out.write("            ");
+
+            }while(rs.next());
+            }
+            
+            
+            
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        
+      out.write("\n");
+      out.write("            \n");
+      out.write("        </div> \n");
+      out.write("        </div>\n");
+      out.write(" \n");
+      out.write("      \n");
       out.write("      </div>\n");
-      out.write("    </div>\n");
+      out.write("    \n");
       out.write("  </body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {

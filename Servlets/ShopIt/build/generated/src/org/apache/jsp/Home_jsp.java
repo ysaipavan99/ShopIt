@@ -3,6 +3,10 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.sql.DriverManager;
+import java.sql.Connection;
 
 public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -44,6 +48,10 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("  <head>\n");
@@ -53,12 +61,13 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("  <body>\n");
       out.write("    <div class=\"menu-area\">\n");
       out.write("      <ul>\n");
-      out.write("        <li><a href=\"profile.html\">Profile</a></li>\n");
-      out.write("        <li><a href=\"settings.html\">Settings</a></li>\n");
+      out.write("        <li><a href=\"http://localhost:8080/ShopIt/profile\">Profile</a></li>\n");
+      out.write("        <li><a href=\"http://localhost:8080/ShopIt/settings.jsp\">Settings</a></li>\n");
+      out.write("        <li><a href=\"http://localhost:8080/ShopIt/review.jsp\">Add Review</a></li>\n");
       out.write("      </ul>\n");
-      out.write("      <form id=\"searched\" onsubmit=\"return retrieveSearch();\">\n");
-      out.write("          <input type=\"submit\"/>\n");
-      out.write("          <input type=\"text\" id='searchText' name=\"searched\"/>\n");
+      out.write("      <form id=\"searched\" method=\"post\">\n");
+      out.write("          <input type=\"submit\" name=\"button_ok\"/>\n");
+      out.write("          <input type=\"text\" id='searchText' name=\"searchText\"/>\n");
       out.write("      </form>\n");
       out.write("    </div>\n");
       out.write("    <div id=\"content\" class=\"layout_content\">\n");
@@ -66,92 +75,94 @@ public final class Home_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("            <!-- Side navigation -->\n");
       out.write("      <div id=\"sidenav\">\n");
       out.write("        <a href=\"#\">About</a>\n");
-      out.write("        <a href=\"#\">Services</a>\n");
+      out.write("        <a href=\"http://localhost:8080/ShopIt/dummyBean.jsp\">JavaBean Example</a>\n");
       out.write("        <a href=\"#\">Clients</a>\n");
       out.write("        <a href=\"#\">Contact</a>\n");
       out.write("      </div>\n");
       out.write("      <div id=\"primary\" class=\"layout_primary\">\n");
       out.write("\n");
-      out.write("        <h1>MYLOGO.COM</h1>\n");
+      out.write("        <h1>ShopIt</h1>\n");
       out.write("        <hr>\n");
       out.write("\n");
-      out.write("        <h2>PORTFOLIO</h2>\n");
-      out.write("\n");
-      out.write("        <div id=\"myBtnContainer\">\n");
-      out.write("          <button class=\"btn active\" onclick=\"filterSelection('all')\"> Show all</button>\n");
-      out.write("          <button class=\"btn\" onclick=\"filterSelection('nature')\"> Nature</button>\n");
-      out.write("          <button class=\"btn\" onclick=\"filterSelection('cars')\"> Cars</button>\n");
-      out.write("          <button class=\"btn\" onclick=\"filterSelection('people')\"> People</button>\n");
-      out.write("        </div>\n");
-      out.write("\n");
-      out.write("        <!-- Portfolio Gallery Grid -->\n");
+      out.write("        <h2>Product Reviews</h2>\n");
       out.write("        <div class=\"row\">\n");
-      out.write("          <div class=\"column nature\">\n");
-      out.write("            <div class=\"content\">\n");
-      out.write("              <img src=\"/w3images/mountains.jpg\" alt=\"Mountains\" style=\"width:100%\">\n");
-      out.write("              <h4>Mountains</h4>\n");
-      out.write("              <p>Lorem ipsum dolor..</p>\n");
-      out.write("            </div>\n");
-      out.write("          </div>\n");
-      out.write("          <div class=\"column nature\">\n");
-      out.write("            <div class=\"content\">\n");
-      out.write("            <img src=\"/w3images/lights.jpg\" alt=\"Lights\" style=\"width:100%\">\n");
-      out.write("              <h4>Lights</h4>\n");
-      out.write("              <p>Lorem ipsum dolor..</p>\n");
-      out.write("            </div>\n");
-      out.write("          </div>\n");
-      out.write("          <div class=\"column nature\">\n");
-      out.write("            <div class=\"content\">\n");
-      out.write("            <img src=\"/w3images/nature.jpg\" alt=\"Nature\" style=\"width:100%\">\n");
-      out.write("              <h4>Forest</h4>\n");
-      out.write("              <p>Lorem ipsum dolor..</p>\n");
-      out.write("            </div>\n");
-      out.write("          </div>\n");
+      out.write("            \n");
+      out.write("        ");
+
+            try{
+        Class.forName("com.mysql.jdbc.Driver");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        String url="jdbc:mysql://localhost/ShopIt";
+        String user="root";
+        String pw="";
+        
+        Connection con=null;
+        String searchText = "", sql="select * from reviews";
+        
+        
+        try{
+            con=DriverManager.getConnection(url,user,pw);
+            Statement st=con.createStatement();
+            System.out.println("con est");
+
+            if(request.getParameter("button_ok")!=null){
+                searchText = request.getParameter("searchText");
+                if(searchText!=""){
+                    sql="select * from reviews where reviews.Product='"+searchText+"'";    
+                }
+                else{
+                    sql="select * from reviews";
+                }
+            }
+            else{
+                sql="select * from reviews";
+            }
+            
+            ResultSet rs=st.executeQuery(sql);
+            
+            if(!rs.next()){
+                System.out.println("Nothing to show");
+                out.println("<html><head></head><body onload=\"alert('Nothing to show')\"></body></html>");
+            }
+            else{
+                System.out.println(rs.getString(3));
+                do{
+            
       out.write("\n");
-      out.write("          <div class=\"column cars\">\n");
-      out.write("            <div class=\"content\">\n");
-      out.write("              <img src=\"/w3images/cars1.jpg\" alt=\"Car\" style=\"width:100%\">\n");
-      out.write("              <h4>Retro</h4>\n");
-      out.write("              <p>Lorem ipsum dolor..</p>\n");
+      out.write("            <div class=\"column\">\n");
+      out.write("            <div class=\"content\" onclick='window.location = `http://localhost:8080/ShopIt/searched.jsp?param1=");
+      out.print(rs.getString(1));
+      out.write("` '>\n");
+      out.write("                <h2>");
+      out.print(rs.getString(4));
+      out.write("</h2>\n");
+      out.write("                Rating: <b>");
+      out.print(rs.getString(3));
+      out.write("</b><br/>\n");
+      out.write("                Review: <b>");
+      out.print(rs.getString(7));
+      out.write("</b><br/>\n");
       out.write("            </div>\n");
-      out.write("          </div>\n");
-      out.write("          <div class=\"column cars\">\n");
-      out.write("            <div class=\"content\">\n");
-      out.write("            <img src=\"/w3images/cars2.jpg\" alt=\"Car\" style=\"width:100%\">\n");
-      out.write("              <h4>Fast</h4>\n");
-      out.write("              <p>Lorem ipsum dolor..</p>\n");
       out.write("            </div>\n");
-      out.write("          </div>\n");
-      out.write("          <div class=\"column cars\">\n");
-      out.write("            <div class=\"content\">\n");
-      out.write("            <img src=\"/w3images/cars3.jpg\" alt=\"Car\" style=\"width:100%\">\n");
-      out.write("              <h4>Classic</h4>\n");
-      out.write("              <p>Lorem ipsum dolor..</p>\n");
-      out.write("            </div>\n");
-      out.write("          </div>\n");
+      out.write("            ");
+
+            }while(rs.next());
+            }
+            
+            
+            
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        
       out.write("\n");
-      out.write("          <div class=\"column people\">\n");
-      out.write("            <div class=\"content\">\n");
-      out.write("              <img src=\"/w3images/people1.jpg\" alt=\"Car\" style=\"width:100%\">\n");
-      out.write("              <h4>Girl</h4>\n");
-      out.write("              <p>Lorem ipsum dolor..</p>\n");
-      out.write("            </div>\n");
-      out.write("          </div>\n");
-      out.write("          <div class=\"column people\">\n");
-      out.write("            <div class=\"content\">\n");
-      out.write("            <img src=\"/w3images/people2.jpg\" alt=\"Car\" style=\"width:100%\">\n");
-      out.write("              <h4>Man</h4>\n");
-      out.write("              <p>Lorem ipsum dolor..</p>\n");
-      out.write("            </div>\n");
-      out.write("          </div>\n");
-      out.write("          <div class=\"column people\">\n");
-      out.write("            <div class=\"content\">\n");
-      out.write("            <img src=\"/w3images/people3.jpg\" alt=\"Car\" style=\"width:100%\">\n");
-      out.write("              <h4>Woman</h4>\n");
-      out.write("              <p>Lorem ipsum dolor..</p>\n");
-      out.write("            </div>\n");
-      out.write("          </div>\n");
-      out.write("        <!-- END GRID -->\n");
+      out.write("            \n");
+      out.write("        </div> \n");
       out.write("        </div>\n");
       out.write("\n");
       out.write("      </div>\n");

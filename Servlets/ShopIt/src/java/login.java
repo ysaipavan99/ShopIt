@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -85,6 +86,8 @@ public class login extends HttpServlet {
                 String name=rs.getString(3);
                 String gender=rs.getString(4);
                 String mobnum=rs.getString(5);
+                
+                //Cookies
                 Cookie c1 = new Cookie("email",email);
                 Cookie c2 = new Cookie("name",URLEncoder.encode( name, "UTF-8" ));
                 Cookie c3 = new Cookie("gender",URLEncoder.encode( gender, "UTF-8" ));
@@ -96,6 +99,20 @@ public class login extends HttpServlet {
                 response.addCookie(c4);
                 System.out.println("coo cre");
                 response.sendRedirect("http://localhost:8080/ShopIt/Home.jsp");
+                /*
+                //JavaBeans
+                loginBean lb = new loginBean();
+                lb.setEmail(email);
+                lb.setGender(gender);
+                lb.setMobnum(mobnum);
+                lb.setName(name);
+                
+                /**** Storing Bean In Session ****/
+                /*
+                request.getSession().setAttribute("userDetails", lb);
+                RequestDispatcher rd = request.getRequestDispatcher("http://localhost:8080/ShopIt/dummyBean.jsp");
+	        rd.forward(request, response);
+                */
             }
             
             

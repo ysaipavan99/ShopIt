@@ -4,6 +4,10 @@
     Author     : HP
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,9 +22,9 @@
         <li><a href="http://localhost:8080/ShopIt/settings.jsp">Settings</a></li>
         <li><a href="http://localhost:8080/ShopIt/review.jsp">Add Review</a></li>
       </ul>
-      <form id="searched" onsubmit="return retrieveSearch();">
-          <input type="submit"/>
-          <input type="text" id='searchText' name="searched"/>
+      <form id="searched" method="post">
+          <input type="submit" name="button_ok"/>
+          <input type="text" id='searchText' name="searchText"/>
       </form>
     </div>
     <div id="content" class="layout_content">
@@ -28,92 +32,82 @@
             <!-- Side navigation -->
       <div id="sidenav">
         <a href="#">About</a>
-        <a href="#">Services</a>
+        <a href="http://localhost:8080/ShopIt/dummyBean.jsp">JavaBean Example</a>
         <a href="#">Clients</a>
         <a href="#">Contact</a>
       </div>
       <div id="primary" class="layout_primary">
 
-        <h1>MYLOGO.COM</h1>
+        <h1>ShopIt</h1>
         <hr>
 
-        <h2>PORTFOLIO</h2>
-
-        <div id="myBtnContainer">
-          <button class="btn active" onclick="filterSelection('all')"> Show all</button>
-          <button class="btn" onclick="filterSelection('nature')"> Nature</button>
-          <button class="btn" onclick="filterSelection('cars')"> Cars</button>
-          <button class="btn" onclick="filterSelection('people')"> People</button>
-        </div>
-
-        <!-- Portfolio Gallery Grid -->
+        <h2>Product Reviews</h2>
         <div class="row">
-          <div class="column nature">
-            <div class="content">
-              <img src="/w3images/mountains.jpg" alt="Mountains" style="width:100%">
-              <h4>Mountains</h4>
-              <p>Lorem ipsum dolor..</p>
-            </div>
-          </div>
-          <div class="column nature">
-            <div class="content">
-            <img src="/w3images/lights.jpg" alt="Lights" style="width:100%">
-              <h4>Lights</h4>
-              <p>Lorem ipsum dolor..</p>
-            </div>
-          </div>
-          <div class="column nature">
-            <div class="content">
-            <img src="/w3images/nature.jpg" alt="Nature" style="width:100%">
-              <h4>Forest</h4>
-              <p>Lorem ipsum dolor..</p>
-            </div>
-          </div>
+            
+        <%
+            try{
+        Class.forName("com.mysql.jdbc.Driver");
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
+        String url="jdbc:mysql://localhost/ShopIt";
+        String user="root";
+        String pw="";
+        
+        Connection con=null;
+        String searchText = "", sql="select * from reviews";
+        
+        
+        try{
+            con=DriverManager.getConnection(url,user,pw);
+            Statement st=con.createStatement();
+            System.out.println("con est");
 
-          <div class="column cars">
-            <div class="content">
-              <img src="/w3images/cars1.jpg" alt="Car" style="width:100%">
-              <h4>Retro</h4>
-              <p>Lorem ipsum dolor..</p>
+            if(request.getParameter("button_ok")!=null){
+                searchText = request.getParameter("searchText");
+                if(searchText!=""){
+                    sql="select * from reviews where reviews.Product='"+searchText+"'";    
+                }
+                else{
+                    sql="select * from reviews";
+                }
+            }
+            else{
+                sql="select * from reviews";
+            }
+            
+            ResultSet rs=st.executeQuery(sql);
+            
+            if(!rs.next()){
+                System.out.println("Nothing to show");
+                out.println("<html><head></head><body onload=\"alert('Nothing to show')\"></body></html>");
+            }
+            else{
+                System.out.println(rs.getString(3));
+                do{
+            %>
+            <div class="column">
+            <div class="content" onclick='window.location = `http://localhost:8080/ShopIt/searched.jsp?param1=<%=rs.getString(1)%>` '>
+                <h2><%=rs.getString(4)%></h2>
+                Rating: <b><%=rs.getString(3)%></b><br/>
+                Review: <b><%=rs.getString(7)%></b><br/>
             </div>
-          </div>
-          <div class="column cars">
-            <div class="content">
-            <img src="/w3images/cars2.jpg" alt="Car" style="width:100%">
-              <h4>Fast</h4>
-              <p>Lorem ipsum dolor..</p>
             </div>
-          </div>
-          <div class="column cars">
-            <div class="content">
-            <img src="/w3images/cars3.jpg" alt="Car" style="width:100%">
-              <h4>Classic</h4>
-              <p>Lorem ipsum dolor..</p>
-            </div>
-          </div>
-
-          <div class="column people">
-            <div class="content">
-              <img src="/w3images/people1.jpg" alt="Car" style="width:100%">
-              <h4>Girl</h4>
-              <p>Lorem ipsum dolor..</p>
-            </div>
-          </div>
-          <div class="column people">
-            <div class="content">
-            <img src="/w3images/people2.jpg" alt="Car" style="width:100%">
-              <h4>Man</h4>
-              <p>Lorem ipsum dolor..</p>
-            </div>
-          </div>
-          <div class="column people">
-            <div class="content">
-            <img src="/w3images/people3.jpg" alt="Car" style="width:100%">
-              <h4>Woman</h4>
-              <p>Lorem ipsum dolor..</p>
-            </div>
-          </div>
-        <!-- END GRID -->
+            <%
+            }while(rs.next());
+            }
+            
+            
+            
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        %>
+            
+        </div> 
         </div>
 
       </div>
