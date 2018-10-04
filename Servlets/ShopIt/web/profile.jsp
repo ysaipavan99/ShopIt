@@ -55,7 +55,7 @@
         try{
             con=DriverManager.getConnection(url,user,pw);
             Statement st=con.createStatement();
-            System.out.println("con est");
+            System.out.println(request.getAttribute("email").toString().trim());
                        
             String email=request.getAttribute("email").toString().trim();
             
@@ -73,7 +73,7 @@
                 do{
             %>
             <div class="column">
-            <div class="content" onclick='window.location = `http://localhost:8080/ShopIt/searched.jsp?param1=<%=rs.getString(1)%>` '>
+            <div class="content" onclick='window.location = `http://localhost:8080/ShopIt/html/clickedItem.jsp?param1=<%=rs.getString(1)%>` '>
                 <h2><%=rs.getString(4)%></h2>
                 Rating: <b><%=rs.getString(3)%></b><br/>
                 Review: <b><%=rs.getString(7)%></b><br/>

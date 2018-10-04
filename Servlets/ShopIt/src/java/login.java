@@ -98,8 +98,8 @@ public class login extends HttpServlet {
                 response.addCookie(c3);
                 response.addCookie(c4);
                 System.out.println("coo cre");
-                response.sendRedirect("http://localhost:8080/ShopIt/Home.jsp");
-                /*
+                //response.sendRedirect("http://localhost:8080/ShopIt/Home.jsp");
+                
                 //JavaBeans
                 loginBean lb = new loginBean();
                 lb.setEmail(email);
@@ -108,11 +108,11 @@ public class login extends HttpServlet {
                 lb.setName(name);
                 
                 /**** Storing Bean In Session ****/
-                /*
-                request.getSession().setAttribute("userDetails", lb);
-                RequestDispatcher rd = request.getRequestDispatcher("http://localhost:8080/ShopIt/dummyBean.jsp");
+                
+                request.getSession().setAttribute("UD", lb);
+                RequestDispatcher rd = request.getRequestDispatcher("/Home.jsp");
 	        rd.forward(request, response);
-                */
+                
             }
             
             

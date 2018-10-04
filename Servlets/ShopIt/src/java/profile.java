@@ -79,6 +79,7 @@ public class profile extends HttpServlet {
                 request.setAttribute("mobnum",mobnum);
             }
         }
+        System.out.println(name+gender);
         dispatcher.forward(request,response);
         // response.sendRedirect("http://localhost:8080/ShopIt/profile.jsp");
         

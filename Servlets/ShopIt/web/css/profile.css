@@ -13,8 +13,8 @@ body{
   background: rgba(0,0,0,0.4);
   padding: 40px;
   text-align: center;
-  margin-top: 5%;
   color: white;
+  position: fixed;
   font-family: 'Century Gothic', sans-serif;
 }
 

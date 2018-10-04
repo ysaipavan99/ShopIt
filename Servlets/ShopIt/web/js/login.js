@@ -31,7 +31,6 @@
             }
         }
         if(check){
-          alert("Congratulations!!");
         }
 
         return check;

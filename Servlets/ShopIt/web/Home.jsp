@@ -16,12 +16,8 @@
     <title>HOME</title>
     <link rel="stylesheet" href="./css/home.css">
   <body>
+    <div class="background">  
     <div class="menu-area">
-      <ul>
-        <li><a href="http://localhost:8080/ShopIt/profile">Profile</a></li>
-        <li><a href="http://localhost:8080/ShopIt/settings.jsp">Settings</a></li>
-        <li><a href="http://localhost:8080/ShopIt/review.jsp">Add Review</a></li>
-      </ul>
       <form id="searched" method="post">
           <input type="submit" name="button_ok"/>
           <input type="text" id='searchText' name="searchText"/>
@@ -31,14 +27,42 @@
 
             <!-- Side navigation -->
       <div id="sidenav">
-        <a href="#">About</a>
-        <a href="http://localhost:8080/ShopIt/dummyBean.jsp">JavaBean Example</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
+        <div class="flow" >
+        <h1>ShopIt</h1>
+        <a class="a" href="http://localhost:8080/ShopIt/review.jsp">+ Review</a>
+        <a class="b" href="http://localhost:8080/ShopIt/profile">Profile</a>
+        <a class="c " href="http://localhost:8080/ShopIt/settings.jsp">Settings</a>
+        </div>
+        <div class="bean-box" style="">
+        <h2>User Details</h2>        
+        <c:choose>
+
+            <c:when test="${empty UD}">
+               
+            </c:when>
+            <c:otherwise>
+                <table>
+                    <tr>
+                        <td>Name: </td>
+                        <td>${UD.name}</td>
+                    </tr>
+                    <tr>
+                        <td>Email: </td>
+                        <td>${UD.email}</td>
+                    </tr>
+                    <tr>
+                        <td>Gender: </td>
+                        <td>${UD.gender}</td>
+                    </tr>
+                    <tr>
+                        <td>Mobile: </td>
+                        <td>${UD.mobnum}</td>
+                    </tr>
+                </table>
+            </div>
       </div>
       <div id="primary" class="layout_primary">
 
-        <h1>ShopIt</h1>
         <hr>
 
         <h2>Product Reviews</h2>
@@ -89,7 +113,7 @@
                 do{
             %>
             <div class="column">
-            <div class="content" onclick='window.location = `http://localhost:8080/ShopIt/searched.jsp?param1=<%=rs.getString(1)%>` '>
+            <div class="content" onclick='window.location = `http://localhost:8080/ShopIt/html/clickedItem.jsp?param1=<%=rs.getString(1)%>` '>
                 <h2><%=rs.getString(4)%></h2>
                 Rating: <b><%=rs.getString(3)%></b><br/>
                 Review: <b><%=rs.getString(7)%></b><br/>
@@ -111,6 +135,7 @@
         </div>
 
       </div>
+    </div>
     </div>
     <script src="./js/home.js"></script>
   </body>

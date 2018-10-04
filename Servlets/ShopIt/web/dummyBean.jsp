@@ -4,9 +4,9 @@
     Author     : HP
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:useBean id="userDetails" scope="session" class="loginBean"/>
-<jsp:setProperty name="userDetails" property="name" value="Name" />
+
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,23 +15,31 @@
     </head>
     <body>
         <h1>User Details</h1>
-        <table>
-            <tr>
-                <td>Name: </td>
-                <td><jsp:getProperty property="name" name="loginBean"/></td>
-            </tr>
-            <tr>
-                <td>Email: </td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Gender: </td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Mobile: </td>
-                <td></td>
-            </tr>
-        </table>
+        
+        
+        <c:choose>
+
+            <c:when test="${empty UD}">
+               
+            </c:when>
+            <c:otherwise>
+                <table>
+                    <tr>
+                        <td>Name: </td>
+                        <td>${UD.name}</td>
+                    </tr>
+                    <tr>
+                        <td>Email: </td>
+                        <td>${UD.email}</td>
+                    </tr>
+                    <tr>
+                        <td>Gender: </td>
+                        <td>${UD.gender}</td>
+                    </tr>
+                    <tr>
+                        <td>Mobile: </td>
+                        <td>${UD.mobnum}</td>
+                    </tr>
+                </table>
     </body>
 </html>

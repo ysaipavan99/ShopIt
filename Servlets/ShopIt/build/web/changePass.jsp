@@ -12,7 +12,7 @@
     <title>Change Password</title>
   </head>
   <body>
-    <link rel="stylesheet" href="css/login.css">
+    
     <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
     <div class="limiter">
       <div class="container">
