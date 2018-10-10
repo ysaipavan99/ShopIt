@@ -80,7 +80,7 @@ public final class Login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\t</script>\n");
       out.write("</head>\n");
-      out.write("<body>\n");
+      out.write("<body onload=\"document.login-form.reset();\">\n");
       out.write("  <link rel=\"stylesheet\" href=\"css/login.css\">\n");
       out.write("\t<link rel=\"stylesheet\" type=\"text/css\" href=\"fonts/iconic/css/material-design-iconic-font.min.css\">\n");
       out.write("\t<div class=\"limiter\">\n");

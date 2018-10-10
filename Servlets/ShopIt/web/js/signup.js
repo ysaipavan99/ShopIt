@@ -41,7 +41,6 @@
         var p1=$('#passMain').text();
 
         if(check){
-          alert("Bravo!! you know how to fill a form!!");
           getValues();
         }
 
@@ -75,6 +74,10 @@
               if($(input).val().trim().match(/^(?=.*\d)(?=.*[a-zA-Z])[a-zA-Z0-9]{7,}$/)==null){
                 return false;
               }
+              
+        }
+        else if(($(input).attr('name')=='passMain') != ($(input).attr('name')=='passConfirm') ){
+            return false;
         }
 
         else {

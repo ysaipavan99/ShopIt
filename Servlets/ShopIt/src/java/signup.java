@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -57,7 +58,7 @@ public class signup extends HttpServlet {
         String url="jdbc:mysql://localhost/ShopIt";
         String user="root";
         String pw="";
-        
+        PrintWriter out = response.getWriter();
         Connection con=null;
         
         try{
@@ -65,21 +66,23 @@ public class signup extends HttpServlet {
             Statement st=con.createStatement();
             System.out.println("con est");
             String sql="insert into userDetails values(?,?,?,?,?)";
-            
+            String mail = request.getParameter("email");
             PreparedStatement ps=con.prepareStatement(sql);
             ps.setString(1,request.getParameter("email"));
             ps.setString(2,request.getParameter("passMain"));
             ps.setString(3,request.getParameter("uname"));
             ps.setString(4,request.getParameter("gender"));
             ps.setString(5,request.getParameter("mobnum"));
-            
             ps.executeUpdate();
+            response.sendRedirect("http://localhost:8080/ShopIt/mainPage.jsp");
+            
             System.out.println("row inserted");
             
         }catch(Exception e){
-            System.out.println(e);
+            out.println("<html><head></head><body onload=\"alert('User already exists')\"></body></html>");
+
+
         }
-        response.sendRedirect("http://localhost:8080/ShopIt/mainPage.jsp");
         
         
     }

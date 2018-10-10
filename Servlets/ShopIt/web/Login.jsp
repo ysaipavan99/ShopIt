@@ -41,7 +41,7 @@
 
 	</script>
 </head>
-<body>
+<body onload="document.login-form.reset();">
   <link rel="stylesheet" href="css/login.css">
 	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
 	<div class="limiter">
